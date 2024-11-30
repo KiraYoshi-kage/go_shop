@@ -1,0 +1,36 @@
+# 服务器配置
+server:
+  port: 8080
+  mode: debug  # debug/release
+  jwt_secret: "myshop_secret_key"
+
+# 数据库配置
+database:
+  driver: mysql
+  host: localhost
+  port: 3306
+  username: your_username
+  password: your_password
+  dbname: myshop
+  charset: utf8mb4
+  max_idle_conns: 10
+  max_open_conns: 100
+  conn_max_lifetime: 3600
+
+# Redis配置
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 100
+  min_idle_conns: 10
+
+# 日志配置
+log:
+  level: debug
+  filename: ./logs/myshop.log
+  max_size: 100
+  max_backups: 10
+  max_age: 7
+  compress: true 

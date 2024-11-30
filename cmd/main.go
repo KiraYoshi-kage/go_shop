@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	_ "myshop/docs" // 导入swagger文档
+	"myshop/internal/config"
 	"myshop/internal/handler"
 	"myshop/internal/model"
 	"myshop/internal/repository"
@@ -90,8 +92,14 @@ func main() {
 	// 添加swagger路由
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
 
+	// 加载配置
+	config, err := config.LoadConfig("config.yaml")
+	if err != nil {
+		log.Fatalf("加载配置失败: %v", err)
+	}
+
 	// 启动服务器
-	if err := r.Run(":8080"); err != nil {
+	if err := r.Run(fmt.Sprintf(":%d", config.Server.Port)); err != nil {
 		log.Fatal("服务器启动失败:", err)
 	}
 }
